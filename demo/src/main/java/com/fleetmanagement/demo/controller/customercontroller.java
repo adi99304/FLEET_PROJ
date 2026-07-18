@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
+@CrossOrigin(origins="http://localhost:5173")
 public class customercontroller {
     @Autowired
     private customerservice custser;
@@ -27,6 +29,10 @@ public class customercontroller {
     @PutMapping("/updatecustomer/{id}")
     public void updatecustomerc(@RequestBody Customer customer ,@PathVariable Long id){
         custser.updatecustomer(customer,id);
+    }
+    @DeleteMapping("/delete/{id}")
+    public void  deletecustomerc(@PathVariable long id ){
+        custser.deletecustomer(id);
     }
 
 }

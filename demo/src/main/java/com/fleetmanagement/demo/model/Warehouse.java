@@ -18,7 +18,7 @@ public class Warehouse {
 
     private String address;
 
-    private Long spaceAvailable;
+    private double spaceAvailable;
 
     private String city;
 

@@ -1,9 +1,7 @@
 package com.fleetmanagement.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fleetmanagement.demo.enums.driveravailable;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -17,4 +15,6 @@ public class Driver {
     private String driverName;
     private String driverPhone;
     private String driverAddress;
+    @Enumerated(EnumType.STRING)
+    private driveravailable driavailable;
 }
