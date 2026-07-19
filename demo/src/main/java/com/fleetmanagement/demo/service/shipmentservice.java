@@ -41,7 +41,7 @@ public class shipmentservice {
     }
 
     private String generatetrackingnumber(){
-        Random random= new Random();
+        SecureRandom random = new SecureRandom();
         int number= random.nextInt(999999)+100000;
         LocalDate today= LocalDate.now();
         DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyyMMdd");
@@ -61,7 +61,7 @@ public class shipmentservice {
 
             }
         }
-        return null;
+        throw new RuntimeException("No warehouse available");
     }
 
     // vehicle assignment
@@ -102,20 +102,31 @@ public class shipmentservice {
         shipment.setVehicle(assignvehicle(shipment.getWeight()));
         shipment.setDriver(assigndriver());
         shipment.setStatus(Shipmentstatus.CREATED);
-//        Driver driver = drirepo.findById(shipment.getDriver().getDriverid()).orElseThrow();
-//        shipment.setDriver(driver);
-//        Warehouse warehouse=warerepo.findById(shipment.getWarehouse().getWarehouseId()).orElseThrow();
-//        shipment.setWarehouse(warehouse);
-//        Vehicle vehicle= vehrepo.findById(shipment.getVehicle().getVehicleid()).orElseThrow();
-//        shipment.setVehicle(vehicle);
+
         shiprepo.save(shipment);
 
     }
-
-    public void updateshipments(Shipment shipment) {
-
+    @Transactional
+    public void updateshipments(Shipment shipment,Long id) {
+    Shipment oldship= shiprepo.findById(id).orElseThrow();
+    if(shipment.getStatus() != null){
+        oldship.setStatus(shipment.getStatus());
+        shiprepo.save(oldship);
     }
-
+    if(shipment.getStatus()== Shipmentstatus.DELIVERED){
+        Driver driver =oldship.getDriver();
+        driver.setDriavailable(driveravailable.available);
+        drirepo.save(driver);
+        Warehouse warehouse= oldship.getWarehouse();
+        warehouse.setSpaceAvailable(warehouse.getSpaceAvailable()+oldship.getWeight());
+        warerepo.save(warehouse);
+        Vehicle vehicle = oldship.getVehicle();
+        vehicle.setVehavailable(Vehicleavailable.available);
+        vehicle.setCapacity(vehicle.getCapacity()+oldship.getWeight());
+        vehrepo.save(vehicle);
+    }
+    }
+    @Transactional
     public void deleteshipments(Long id) {
         Shipment shipment=shiprepo.findById(id).orElseThrow();
        Driver driver =shipment.getDriver();

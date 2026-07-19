@@ -28,9 +28,10 @@ public class shipmentcontroller {
         shipser.addshipments(shipment);
 
     }
-    @PutMapping("/updateshipment")
-    public void updateshipmentc(@RequestBody Shipment shipment){
-        shipser.updateshipments(shipment);
+    @PutMapping("/updateshipment/status/{id}")
+    public void updateshipmentc(@RequestBody Shipment shipment,@PathVariable Long id){
+
+        shipser.updateshipments(shipment,id);
     }
     @DeleteMapping("/deleteshipment/{id}")
     public void deleteshipmentc(@PathVariable Long id){
