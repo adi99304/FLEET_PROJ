@@ -66,33 +66,7 @@ The platform also integrates **Spring AI with Ollama** to generate intelligent f
 
 ---
 
-# 🏗 Architecture
 
-```text
-React Frontend
-       │
-       ▼
-Spring Boot REST API
-       │
- ┌─────┼─────┐
- │     │     │
- ▼     ▼     ▼
-Shipment Vehicle Warehouse
- │        │
- ▼        ▼
-Customer Driver
-       │
-       ▼
-     MySQL
-       │
-       ▼
-   Spring AI
-       │
-       ▼
- Ollama (Qwen)
-```
-
----
 
 # 🛠 Tech Stack
 
@@ -109,6 +83,35 @@ Customer Driver
 
 ---
 
+# 🗄 Database Design
+
+The application follows a normalized relational database design to efficiently manage customers, shipments, warehouses, vehicles, and drivers while maintaining scalable relationships between logistics entities.
+
+<div align="center">
+
+### Entity Relationship Diagram (ERD)
+
+<p align="center">
+  <a href="https://drawsql.app/teams/aditya-nu/diagrams/fleet-management">
+    <img src="https://drawsql.app/teams/aditya-nu/diagrams/fleet-management/embed" alt="Fleet Management Database Design" width="100%">
+  </a>
+</p>
+
+**Click the diagram to view it in full size.**
+
+</div>
+
+---
+
+### Core Relationships
+
+- 👥 **Customer → Shipment** (One-to-Many)
+- 🏭 **Warehouse → Shipment** (One-to-Many)
+- 🚚 **Vehicle → Shipment** (One-to-Many)
+- 👨‍✈️ **Driver → Vehicle** (One-to-One)
+- 📦 **Shipment** acts as the central entity connecting customers, warehouses, and vehicles.
+
+The schema is designed to reduce redundancy while allowing future extensions such as route optimization, live tracking, predictive maintenance, and AI-assisted fleet planning.
 # 📂 Project Structure
 
 ```text
