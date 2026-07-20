@@ -2,265 +2,203 @@
 
 # 🚚 NexisFleet
 
-### AI-Powered Fleet Management & Logistics Platform
+### AI-Powered Fleet Management Platform
 
-<img src="https://img.shields.io/badge/Java-21-red?style=for-the-badge&logo=openjdk">
-<img src="https://img.shields.io/badge/Spring_Boot-3.5-green?style=for-the-badge&logo=springboot">
-<img src="https://img.shields.io/badge/React-Frontend-61DAFB?style=for-the-badge&logo=react">
-<img src="https://img.shields.io/badge/MySQL-Database-blue?style=for-the-badge&logo=mysql">
-<img src="https://img.shields.io/badge/Spring_AI-Ollama-purple?style=for-the-badge">
-<img src="https://img.shields.io/badge/REST-API-orange?style=for-the-badge">
-<img src="https://img.shields.io/badge/Hibernate-JPA-brown?style=for-the-badge">
+<p align="center">
 
----
+![Java](https://img.shields.io/badge/Java-21-red?style=for-the-badge&logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.5-green?style=for-the-badge&logo=springboot)
+![React](https://img.shields.io/badge/React-Frontend-61DAFB?style=for-the-badge&logo=react)
+![MySQL](https://img.shields.io/badge/MySQL-Database-blue?style=for-the-badge&logo=mysql)
+![Spring AI](https://img.shields.io/badge/Spring_AI-Ollama-purple?style=for-the-badge)
 
-### Intelligent Logistics • Fleet Automation • AI Assisted Operations
+</p>
 
-*A modern Fleet Management System built using Spring Boot, React, MySQL and Spring AI.*
+*A modern Fleet Management System that automates logistics operations using Spring Boot, React, MySQL, and Spring AI.*
 
 </div>
 
 ---
 
-# 📖 Overview
+# 📌 Overview
 
-NexisFleet is an enterprise-style Fleet Management Platform developed to automate logistics operations, optimize shipment management, and provide AI-assisted operational insights.
+NexisFleet is a full-stack fleet management platform designed to streamline logistics operations by managing **customers, shipments, warehouses, vehicles, and drivers**.
 
-Unlike traditional CRUD-based fleet systems, NexisFleet introduces intelligent decision-making by combining logistics algorithms with Large Language Models (LLMs) through Spring AI and Ollama.
-
-The platform allows organizations to efficiently manage:
-
-- 📦 Shipments
-- 🚚 Vehicles
-- 👨‍✈️ Drivers
-- 🏭 Warehouses
-- 👥 Customers
-
-while providing AI-generated operational summaries and intelligent fleet recommendations.
+The platform also integrates **Spring AI with Ollama** to generate intelligent fleet summaries, operational insights, and AI-assisted reports.
 
 ---
 
-# 🎯 Project Goals
-
-The objective of NexisFleet is to build an extensible logistics platform capable of handling real-world fleet operations while demonstrating enterprise backend development practices.
-
-The project focuses on:
-
-- Clean Spring Boot architecture
-- Scalable REST APIs
-- Database normalization
-- Intelligent shipment allocation
-- Warehouse capacity management
-- AI-assisted analytics
-- Modular backend design
-- Modern React frontend
-
----
-
-# ✨ Key Features
+# ✨ Features
 
 ## 📦 Shipment Management
 
-- Create shipments
-- Update shipment status
+- Create & manage shipments
 - Automatic tracking number generation
 - Warehouse allocation
 - Vehicle assignment
-- Estimated delivery tracking
-- Customer linkage
-- Shipment history
-
----
+- Shipment status tracking
 
 ## 🚚 Vehicle Management
 
 - Vehicle registration
-- Capacity management
-- Availability tracking
+- Capacity tracking
+- Availability management
 - Driver assignment
-- Maintenance status
-- Vehicle utilization
-
----
 
 ## 👨‍✈️ Driver Management
 
 - Driver registration
-- Driver availability
+- Availability tracking
 - Vehicle assignment
-- Driver status tracking
-- Operational availability monitoring
-
----
 
 ## 🏭 Warehouse Management
 
-- Warehouse creation
-- Capacity monitoring
-- Remaining storage calculation
-- Automatic warehouse allocation
-- City-based warehouse lookup
+- Warehouse capacity monitoring
+- City-based warehouse allocation
+- Automatic capacity updates
 
----
+## 🤖 AI Features
 
-## 👥 Customer Management
-
-- Customer registration
-- Shipment history
-- Address management
-- Contact management
-
----
-
-## 🤖 AI Fleet Assistant
-
-Powered by:
-
-- Spring AI
-- Ollama
-- Qwen
-
-Capabilities include:
-
-- Fleet Report Generation
-- Dashboard Summaries
-- Operational Insights
-- Shipment Analysis
-- Fleet Recommendations
+- AI Fleet Reports
+- Dashboard Summary
 - Natural Language Queries
+- Logistics Recommendations
 
 ---
 
-# 🚀 Why NexisFleet?
+# 🏗 Architecture
 
-Traditional fleet systems only store information.
-
-NexisFleet helps users **understand** their logistics operations using Artificial Intelligence.
-
-Examples:
-
-✔ Generate operational reports
-
-✔ Explain fleet performance
-
-✔ Summarize dashboard statistics
-
-✔ Provide logistics recommendations
-
-✔ Answer natural language questions
+```text
+React Frontend
+       │
+       ▼
+Spring Boot REST API
+       │
+ ┌─────┼─────┐
+ │     │     │
+ ▼     ▼     ▼
+Shipment Vehicle Warehouse
+ │        │
+ ▼        ▼
+Customer Driver
+       │
+       ▼
+     MySQL
+       │
+       ▼
+   Spring AI
+       │
+       ▼
+ Ollama (Qwen)
+```
 
 ---
 
-# 🛠 Technology Stack
+# 🛠 Tech Stack
 
-| Category | Technologies |
-|-----------|-------------|
-| Backend | Spring Boot 3 |
+| Category | Technology |
+|----------|------------|
+| Backend | Spring Boot |
 | Language | Java 21 |
-| Frontend | React |
+| Frontend | React + Vite |
 | Database | MySQL |
-| ORM | Hibernate / Spring Data JPA |
+| ORM | Hibernate / JPA |
 | AI | Spring AI |
 | LLM | Ollama (Qwen) |
 | Build Tool | Maven |
-| API Testing | Postman / Swagger |
-| Version Control | Git |
-| IDE | IntelliJ IDEA |
-| Frontend Build | Vite |
 
 ---
 
-# 🏗 System Architecture
+# 📂 Project Structure
 
-```
+```text
+backend
+├── controller
+├── service
+├── repository
+├── model
+├── dto
+├── enums
+└── config
 
-                +-----------------------+
-                |     React Frontend    |
-                +-----------+-----------+
-                            |
-                            |
-                   REST API Calls
-                            |
-                            ▼
-                +-----------------------+
-                |    Spring Boot API    |
-                +-----------+-----------+
-                            |
-      ------------------------------------------------
-      |          |           |         |             |
-      ▼          ▼           ▼         ▼             ▼
-
- Customer   Shipment    Vehicle   Warehouse     Driver
-
-      \          |           |         |         /
-       \         |           |         |        /
-        \--------+-----------+---------+-------/
-                           |
-                           ▼
-                    MySQL Database
-
-                           |
-                           ▼
-                     Spring AI Layer
-                           |
-                           ▼
-                     Ollama (Qwen)
-
+frontend
+├── components
+├── pages
+├── services
+└── assets
 ```
 
 ---
 
-# 🌟 Core Capabilities
+# 🚀 Getting Started
 
-✔ Enterprise-style REST APIs
+## Backend
 
-✔ AI Integration
+```bash
+git clone <repository-url>
 
-✔ Intelligent Warehouse Allocation
+cd backend
 
-✔ Vehicle Assignment
+mvn spring-boot:run
+```
 
-✔ Driver Management
+## Frontend
 
-✔ Shipment Tracking
+```bash
+cd frontend
 
-✔ Capacity Monitoring
+npm install
 
-✔ Dashboard Analytics
-
-✔ Modular Backend
-
-✔ Production-style Architecture
+npm run dev
+```
 
 ---
 
-# 📌 Current Modules
+# 🤖 AI Integration
+
+The AI module is powered by **Spring AI** and **Ollama (Qwen)**.
+
+It can generate:
+
+- Fleet summaries
+- Shipment reports
+- Operational insights
+- AI recommendations
+
+---
+
+# 📅 Roadmap
 
 - ✅ Customer Module
 - ✅ Warehouse Module
 - ✅ Vehicle Module
 - ✅ Driver Module
 - ✅ Shipment Module
-- ✅ Dashboard Module
-- ✅ AI Report Generator
+- ✅ Dashboard
+- ✅ Spring AI Integration
 
----
+### Upcoming
 
-# 📈 Future Modules
-
-- Route Optimization
 - Live GPS Tracking
-- Driver Analytics
-- Predictive Maintenance
-- Fleet Scheduling
-- Kafka Integration
+- Route Optimization
 - JWT Authentication
-- Redis Cache
-- Docker Deployment
+- Kafka
+- Docker
 - Kubernetes
-- CI/CD Pipeline
-- Multi-company Support
+- Predictive Maintenance
 
 ---
 
-> "Modern Logistics Powered by Artificial Intelligence."
+# 👨‍💻 Author
+
+**Aditya Hegde**
+
+Final Year B.Tech Project
+
+---
+
+<div align="center">
+
+⭐ If you found this project interesting, consider giving it a star!
+
+</div>
