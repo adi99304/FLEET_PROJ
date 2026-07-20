@@ -50,11 +50,11 @@ public class shipmentservice {
 
     }
     //warehouse assignment
-    private Warehouse assignwarehouse(double shipcap){
+    private Warehouse assignwarehouse(double shipcap,String shipcity){
         List<Warehouse> warehouseList=warerepo.findAll();
         for(int i =0;i<warehouseList.size();i++){
 
-            if(warehouseList.get(i).getSpaceAvailable()>=shipcap){
+            if(warehouseList.get(i).getSpaceAvailable()>=shipcap &&warehouseList.get(i).getCity().equals(shipcity)){
                 warehouseList.get(i).setSpaceAvailable(warehouseList.get(i).getSpaceAvailable()-shipcap);
                 warerepo.save(warehouseList.get(i));
                 return warehouseList.get(i);
@@ -83,6 +83,7 @@ public class shipmentservice {
         for(int i=0;i<driverlist.size();i++){
             if(driverlist.get(i).getDriavailable()== driveravailable.available){
                 driverlist.get(i).setDriavailable(driveravailable.not_available);
+
                 drirepo.save(driverlist.get(i));
                 return driverlist.get(i);
             }
@@ -96,11 +97,14 @@ public class shipmentservice {
             shipment.setTrackingnumber(generatetrackingnumber());
         }
         Customer customer = custrepo.findById(shipment.getCustomer().getCustid()).orElseThrow();
+
         shipment.setCustomer(customer);
         shipment.setCreatedate(LocalDateTime.now());
-        shipment.setWarehouse(assignwarehouse(shipment.getWeight()));
+        // Bypassing warehouse assignment as per user request
+
+        shipment.setWarehouse(assignwarehouse(shipment.getWeight(),shipment.getCustomer().getCity()));
         shipment.setVehicle(assignvehicle(shipment.getWeight()));
-        shipment.setDriver(assigndriver());
+//        shipment.setDriver(assigndriver());
         shipment.setStatus(Shipmentstatus.CREATED);
 
         shiprepo.save(shipment);
@@ -114,12 +118,16 @@ public class shipmentservice {
         shiprepo.save(oldship);
     }
     if(shipment.getStatus()== Shipmentstatus.DELIVERED){
-        Driver driver =oldship.getDriver();
-        driver.setDriavailable(driveravailable.available);
-        drirepo.save(driver);
+//        Driver driver =oldship.getDriver();
+//        driver.setDriavailable(driveravailable.available);
+//        drirepo.save(driver);
+//
         Warehouse warehouse= oldship.getWarehouse();
-        warehouse.setSpaceAvailable(warehouse.getSpaceAvailable()+oldship.getWeight());
-        warerepo.save(warehouse);
+        if (warehouse != null) {
+            warehouse.setSpaceAvailable(warehouse.getSpaceAvailable()+oldship.getWeight());
+            warerepo.save(warehouse);
+        }
+        
         Vehicle vehicle = oldship.getVehicle();
         vehicle.setVehavailable(Vehicleavailable.available);
         vehicle.setCapacity(vehicle.getCapacity()+oldship.getWeight());
@@ -129,12 +137,16 @@ public class shipmentservice {
     @Transactional
     public void deleteshipments(Long id) {
         Shipment shipment=shiprepo.findById(id).orElseThrow();
-       Driver driver =shipment.getDriver();
-       driver.setDriavailable(driveravailable.available);
-       drirepo.save(driver);
+//       Driver driver =shipment.getDriver();
+//       driver.setDriavailable(driveravailable.available);
+//       drirepo.save(driver);
+       
        Warehouse warehouse= shipment.getWarehouse();
-       warehouse.setSpaceAvailable(warehouse.getSpaceAvailable()+shipment.getWeight());
-       warerepo.save(warehouse);
+       if (warehouse != null) {
+           warehouse.setSpaceAvailable(warehouse.getSpaceAvailable()+shipment.getWeight());
+           warerepo.save(warehouse);
+       }
+       
        Vehicle vehicle = shipment.getVehicle();
        vehicle.setVehavailable(Vehicleavailable.available);
        vehicle.setCapacity(vehicle.getCapacity()+shipment.getWeight());

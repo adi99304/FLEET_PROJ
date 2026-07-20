@@ -1,11 +1,13 @@
 package com.fleetmanagement.demo.service;
 
 
+import com.fleetmanagement.demo.enums.driveravailable;
 import com.fleetmanagement.demo.model.Driver;
 import com.fleetmanagement.demo.repository.driverrepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -51,4 +53,14 @@ public class driverservice {
     }
 
 
+    public List<Driver> availabledrivers() {
+        List<Driver> driverList= drirepo.findAll();
+        List<Driver> updatedriverList= new ArrayList<>();
+        for(int i =0;i<driverList.size();i++){
+            if(driverList.get(i).getDriavailable()== driveravailable.available){
+                updatedriverList.add(driverList.get(i));
+            }
+        }
+        return updatedriverList;
+    }
 }

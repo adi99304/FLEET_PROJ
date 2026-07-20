@@ -1,5 +1,6 @@
 package com.fleetmanagement.demo.controller;
 
+import com.fleetmanagement.demo.model.DriverAssignmentRequest;
 import com.fleetmanagement.demo.model.Vehicle;
 import com.fleetmanagement.demo.service.vehicleservice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,14 @@ public class vehiclecontroller {
     @DeleteMapping("deletevehicle/{id}")
     public void deleteveh(@PathVariable Long id ){
         vehser.deleteveh(id);
+    }
+    @PostMapping("/assigndriver")
+    public void assigndriverc(@RequestBody DriverAssignmentRequest drirequest){
+        vehser.assigndrivers(drirequest);
+    }
+    @PutMapping("/removedriver/{id}")
+    public void removedriverc(@PathVariable("id") Long vehid){
+        vehser.removedrivers(vehid);
     }
 
 }

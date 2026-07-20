@@ -4,6 +4,8 @@ import com.fleetmanagement.demo.enums.Shipmentstatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 @Entity
@@ -12,8 +14,15 @@ public class Shipment {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long shipid;
-    private String RecieverName;
-    private String RecieverAddress;
+
+    @JsonProperty("ReceiverName")
+    @JsonAlias({"receiverName", "RecieverName", "recieverName"})
+    private String ReceiverName;
+
+    @JsonProperty("ReceiverAddress")
+    @JsonAlias({"receiverAddress", "RecieverAddress", "recieverAddress"})
+    private String ReceiverAddress;
+
     private String trackingnumber;
     @ManyToOne
     @JoinColumn(name="custid")
@@ -26,9 +35,9 @@ public class Shipment {
     @ManyToOne
     @JoinColumn(name = "wareid")
     private Warehouse warehouse;
-    @ManyToOne
-    @JoinColumn(name="driverid")
-    private Driver driver;
+//    @ManyToOne
+//    @JoinColumn(name="driverid")
+//    private Driver driver;
     @ManyToOne
     @JoinColumn(name="vehicleid")
     private Vehicle vehicle;

@@ -15,4 +15,7 @@ public class Vehicle {
     private Vehicleavailable vehavailable;
     private String vehiclename;
     private double capacity;
+    @ManyToOne
+    @JoinColumn(name="driverid")
+    private Driver driver;
 }

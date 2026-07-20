@@ -34,5 +34,9 @@ public class drivercontroller {
     public void deletedriver(@PathVariable Long id){
         driser.deletedrivers(id);
     }
+    @GetMapping("/availabledrivers")
+    public List<Driver> availabledriverc(){
+        return driser.availabledrivers();
+    }
 
 }
